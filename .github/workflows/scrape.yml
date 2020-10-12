@@ -11,14 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
+
       - name: Use node
         uses: actions/setup-node@v1
         with:
           node-version: "12.x"
-      - run: npm install
+        run: npm install
+
       - name: Fetch latest data
         run: node scraper.js > profile.json
+
       - name: Commit and push
         run: |-
           git config user.name "Automated"
