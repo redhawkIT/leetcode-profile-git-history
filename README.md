@@ -18,7 +18,5 @@ A historical Github history of my LeetCode progress
 
 ### Todo
 
-- [ ] github pages
-- [ ] validate update
 - [ ] recent submissions
 - [ ] recent posts
