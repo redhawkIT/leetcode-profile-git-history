@@ -6,7 +6,8 @@ A historical Github history of my LeetCode progress
 
 ### Access
 
-http://ethanneff.github.io/leetcode-profile-git-history/profile.json
+- api http://ethanneff.github.io/leetcode-profile-git-history/profile.json
+- history https://github.com/ethanneff/leetcode-profile-git-history/commits/master/profile.json
 
 ### Technology
 
