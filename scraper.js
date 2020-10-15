@@ -1,15 +1,12 @@
 const cheerio = require("cheerio");
 const puppeteer = require("puppeteer");
 
-const getValue = (cheerio, text) => {
-  const output = cheerio(`span:contains("${text}")`)
+const getValue = (cheerio, text) => 
+  cheerio(`span:contains("${text}")`)
     .parent()
     .parent()
     .children("span")
     .text();
-  if (output === "") throw new Error(`unable to retrieve data for: ${text}`);
-  return output;
-};
 
 const getProblem = (cheerio, index) =>
   cheerio('span[class^="difficulty-ac-count"]').parent().eq(index).text();
