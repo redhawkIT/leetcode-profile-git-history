@@ -2,7 +2,7 @@
 
 ### Purpose
 
-A historical Github history of my LeetCode progress
+A Github history of my LeetCode progress
 
 ### Access
 
