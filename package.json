@@ -1,7 +1,7 @@
 {
   "name": "leetcode-profile-git-history",
   "version": "1.0.0",
-  "description": "A historical Github history of my LeetCode progress",
+  "description": "A Github history of my LeetCode progress",
   "main": "index.js",
   "author": "ethanneff",
   "license": "MIT",
