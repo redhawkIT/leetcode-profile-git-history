@@ -30,9 +30,9 @@ const getAcceptance = (cheerio) =>
     .replace("Acceptance", "");
 
 (async () => {
+  const username = "ethanneff";  
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  const username = "ethanneff";
   await page.goto(`https://leetcode.com/${username}/`);
   await page.waitForSelector(".ant-card");
   const html = await page.content();
