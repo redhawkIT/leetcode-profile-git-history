@@ -1,27 +1,60 @@
-const axios = require("axios");
 const cheerio = require("cheerio");
+const puppeteer = require("puppeteer");
 
-const getHtmlText = (cheerio, text) =>
-  cheerio(`li:contains("${text}")`).children(".badge").text().trim();
-
-const getLeetCodeProfile = async (username) => {
-  try {
-    const { data } = await axios.get(`https://leetcode.com/${username}/`);
-    const $ = cheerio.load(data);
-    return {
-      solvedQuestions: getHtmlText($, "Solved Question"),
-      acceptedSubmission: getHtmlText($, "Accepted Submission"),
-      acceptanceRate: getHtmlText($, "Acceptance Rate"),
-      reputation: getHtmlText($, "Reputation"),
-      points: getHtmlText($, "Points"),
-      problems: getHtmlText($, "Problems"),
-      testCases: getHtmlText($, "Test Cases"),
-    };
-  } catch (error) {
-    throw error;
-  }
+const getValue = (cheerio, text) => {
+  const output = cheerio(`span:contains("${text}")`)
+    .parent()
+    .parent()
+    .children("span")
+    .text();
+  if (output === "") throw new Error(`unable to retrieve data for: ${text}`);
+  return output;
 };
 
-getLeetCodeProfile("ethanneff").then((json) =>
-  console.log(JSON.stringify(json))
-);
+const getProblem = (cheerio, index) =>
+  cheerio('span[class^="difficulty-ac-count"]').parent().eq(index).text();
+
+const getProblems = (cheerio) =>
+  cheerio('div[class^="total-solved-count"]').text();
+
+const getSolutions = (cheerio) =>
+  cheerio(".ant-card-head-title").eq(3).text().split(" ")[0];
+
+const getAcceptance = (cheerio) =>
+  cheerio('div[class^="total-solved-count"]')
+    .parent()
+    .parent()
+    .children()
+    .eq(1)
+    .text()
+    .replace("Acceptance", "");
+
+(async () => {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  const username = "ethanneff";
+  await page.goto(`https://leetcode.com/${username}/`);
+  await page.waitForSelector(".ant-card");
+  const html = await page.content();
+  const $ = cheerio.load(html);
+  const output = {
+    solutions: {
+      problems: getProblems($),
+      submissions: getSolutions($),
+      acceptance: getAcceptance($),
+      easy: getProblem($, 0),
+      medium: getProblem($, 1),
+      hard: getProblem($, 2),
+    },
+    contributions: {
+      points: getValue($, "Points"),
+      problems: getValue($, "Problems"),
+      testCases: getValue($, "Testcases"),
+      reputation: getValue($, "Reputation"),
+    },
+    username,
+  };
+  const json = JSON.stringify(output, null, 2);
+  await browser.close();
+  return console.log(json);
+})();
