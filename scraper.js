@@ -37,7 +37,7 @@ const getAcceptance = (cheerio) =>
   await page.waitForSelector(".ant-card");
   const html = await page.content();
   const $ = cheerio.load(html);
-  const output = {
+  const scrape = {
     solutions: {
       problems: getProblems($),
       submissions: getSolutions($),
@@ -54,7 +54,7 @@ const getAcceptance = (cheerio) =>
     },
     username,
   };
-  const json = JSON.stringify(output, null, 2);
+  const prettyJson = JSON.stringify(scrape, null, 2);
   await browser.close();
-  return console.log(json);
+  return console.log(prettyJson);
 })();
