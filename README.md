@@ -13,10 +13,5 @@ A historical Github history of my LeetCode progress
 
 - Github Actions (scrapes every 20 minutes)
 - Github Pages (hosts json)
-- Node + Axios + Cheerio (web scraper)
-- Bash
-
-### Todo
-
-- [ ] recent submissions
-- [ ] recent posts
+- Node + Axios + Puppeteer (web scraper)
+- Bash (updates json)
