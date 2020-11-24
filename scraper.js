@@ -1,15 +1,13 @@
 const cheerio = require("cheerio");
 const puppeteer = require("puppeteer");
 
-const getValue = (cheerio, text) => 
-  cheerio(`span:contains("${text}")`)
-    .parent()
-    .parent()
-    .children("span")
-    .text();
+const getValue = (cheerio, text) =>
+  cheerio(`span:contains("${text}")`).parent().parent().children("span").text();
 
-const getProblem = (cheerio, index) =>
-  cheerio('span[class^="difficulty-ac-count"]').parent().eq(index).text();
+const getProblem = (cheerio, index) => {
+  const top = cheerio('span[class^="difficulty-ac-count"]').eq(index).parent();
+  return `${top.children().eq(0).text()}/${top.children().eq(1).text()}`;
+};
 
 const getProblems = (cheerio) =>
   cheerio('div[class^="total-solved-count"]').text();
@@ -27,7 +25,7 @@ const getAcceptance = (cheerio) =>
     .replace("Acceptance", "");
 
 (async () => {
-  const username = "ethanneff";  
+  const username = "ethanneff";
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto(`https://leetcode.com/${username}/`);
