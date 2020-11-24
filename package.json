@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "ethanneff",
   "license": "MIT",
+  "scripts": {
+    "start": "node scraper.js"
+  },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
     "puppeteer": "^5.3.1"
