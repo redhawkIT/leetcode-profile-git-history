@@ -1,14 +1,14 @@
 {
   "solutions": {
-    "problems": "244",
-    "submissions": "1390",
+    "problems": "246",
+    "submissions": "1396",
     "acceptance": "53.4%",
-    "easy": "164/461",
-    "medium": "73/909",
+    "easy": "166/460",
+    "medium": "73/910",
     "hard": "7/369"
   },
   "contributions": {
-    "points": "1132",
+    "points": "1133",
     "problems": "0",
     "testCases": "0",
     "reputation": "47"
