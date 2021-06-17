@@ -1,11 +1,11 @@
 {
   "solutions": {
-    "problems": "254",
+    "problems": "153",
     "submissions": "862",
-    "acceptance": "53.9%",
-    "easy": "172/499",
-    "medium": "75/1003",
-    "hard": "7/399"
+    "acceptance": "55.0%",
+    "easy": "127/499",
+    "medium": "26/1003",
+    "hard": "0/399"
   },
   "contributions": {
     "points": "1148",
